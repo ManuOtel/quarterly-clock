@@ -76,11 +76,11 @@
                 <p class="meta">
                   Due {project.deadline} • {getCompletionPercent(project).toFixed(0)}%
                 </p>
-                <span class="badge {getProjectStatus(project, quarter)}">
-                  {getProjectStatus(project, quarter).replace("_", " ")}
-                </span>
               </div>
             </div>
+            <span class="badge {getProjectStatus(project, quarter)}">
+              {getProjectStatus(project, quarter).replace("_", " ")}
+            </span>
           </button>
           <button
             type="button"
@@ -168,7 +168,7 @@
 
   .project-item {
     display: grid;
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr auto;
     align-items: center;
     gap: var(--space-md);
     padding: var(--space-md) var(--space-lg);
@@ -184,6 +184,7 @@
     color: inherit;
     font: inherit;
   }
+
 
   .project-item::before {
     content: "";
@@ -234,6 +235,12 @@
     display: flex;
     align-items: center;
     gap: var(--space-md);
+  }
+
+  .project-item .badge {
+    align-self: flex-end;
+    margin-bottom: var(--space-xs);
+    justify-self: end;
   }
 
   .meta {
