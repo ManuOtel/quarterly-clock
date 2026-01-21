@@ -63,24 +63,25 @@
   {:else}
     <ul class="project-list">
       {#each projects as project}
-        <li
-          class:selected={project.id === selectedProjectId}
-          on:click={() => selectProject(project.id)}
-          on:keydown={(e) => e.key === 'Enter' && selectProject(project.id)}
-          role="button"
-          tabindex="0"
-        >
-          <div class="project-content">
-            <h3>{project.name}</h3>
-            <div class="project-meta">
-              <p class="meta">
-                Due {project.deadline} • {getCompletionPercent(project).toFixed(0)}%
-              </p>
-              <span class="badge {getProjectStatus(project, quarter)}">
-                {getProjectStatus(project, quarter).replace("_", " ")}
-              </span>
+        <li>
+          <button
+            type="button"
+            class="project-item"
+            class:selected={project.id === selectedProjectId}
+            on:click={() => selectProject(project.id)}
+          >
+            <div class="project-content">
+              <h3>{project.name}</h3>
+              <div class="project-meta">
+                <p class="meta">
+                  Due {project.deadline} • {getCompletionPercent(project).toFixed(0)}%
+                </p>
+                <span class="badge {getProjectStatus(project, quarter)}">
+                  {getProjectStatus(project, quarter).replace("_", " ")}
+                </span>
+              </div>
             </div>
-          </div>
+          </button>
           <button
             type="button"
             class="icon delete-btn"
@@ -162,6 +163,14 @@
     grid-template-columns: 1fr auto;
     align-items: center;
     gap: var(--space-md);
+    position: relative;
+  }
+
+  .project-item {
+    display: grid;
+    grid-template-columns: 1fr;
+    align-items: center;
+    gap: var(--space-md);
     padding: var(--space-md) var(--space-lg);
     border-radius: var(--radius-lg);
     border: 2px solid var(--color-border);
@@ -169,10 +178,14 @@
     transition: all var(--transition-base);
     position: relative;
     overflow: hidden;
+    text-align: left;
     cursor: pointer;
+    width: 100%;
+    color: inherit;
+    font: inherit;
   }
 
-  .project-list li::before {
+  .project-item::before {
     content: "";
     position: absolute;
     left: 0;
@@ -183,24 +196,24 @@
     transition: all var(--transition-base);
   }
 
-  .project-list li:hover {
+  .project-item:hover {
     transform: translateY(-2px);
     box-shadow: var(--shadow-md);
     border-color: var(--color-primary-light);
   }
 
-  .project-list li:focus-visible {
+  .project-item:focus-visible {
     outline: 2px solid var(--color-primary);
     outline-offset: 2px;
   }
 
-  .project-list li.selected {
+  .project-item.selected {
     border-color: var(--color-primary);
     background: var(--color-primary-bg);
     box-shadow: var(--shadow-lg);
   }
 
-  .project-list li.selected::before {
+  .project-item.selected::before {
     background: linear-gradient(180deg, var(--color-primary) 0%, var(--color-secondary) 100%);
   }
 
