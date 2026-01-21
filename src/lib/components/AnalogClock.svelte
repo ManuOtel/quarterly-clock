@@ -153,13 +153,6 @@
     opacity: 0.4;
   }
 
-  .clock-margin {
-    filter: drop-shadow(0 3px 12px rgba(198, 93, 59, 0.15));
-    stroke: var(--color-primary);
-    stroke-width: 4;
-    opacity: 0.3;
-  }
-
   .month-tick {
     stroke: var(--color-primary-dark);
     stroke-width: 2.5;
