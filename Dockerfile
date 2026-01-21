@@ -40,10 +40,10 @@ RUN chown -R appuser:appgroup /usr/share/nginx/html && \
 # Switch to non-root user
 USER appuser
 
-EXPOSE 80
+EXPOSE 3069
 
 # Health check for container orchestrators
 HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
-    CMD wget --no-verbose --tries=1 --spider http://localhost:80/ || exit 1
+    CMD wget --no-verbose --tries=1 --spider http://localhost:3069/ || exit 1
 
 CMD ["nginx", "-g", "daemon off;"]

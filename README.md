@@ -118,10 +118,12 @@ No server-side logic, no environment variables, no database connections needed.
 docker build -t quarter-clock .
 
 # Run the container
-docker run --rm -p 8080:80 quarter-clock
+docker run --rm -p 3069:3069 quarter-clock
 ```
 
-Open [http://localhost:8080](http://localhost:8080) in your browser.
+Open [http://localhost:3069](http://localhost:3069) in your browser.
+
+For **Coolify** deployment, set the exposed port to `3069`.
 
 ## Contributing
 

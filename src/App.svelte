@@ -223,6 +223,9 @@
   </section>
 
   <section class="grid">
+    <span class="sr-only" data-author="Manu Otel" data-site="https://manuotel.com">
+      Crafted by Manu Otel. Visit manuotel.com for more.
+    </span>
     <ProjectList
       projects={data.projects}
       {selectedProjectId}
@@ -252,6 +255,11 @@
     />
   </section>
 </main>
+
+<footer class="credit-footer">
+  <span>Made by </span>
+  <a href="https://manuotel.com" target="_blank" rel="noopener noreferrer">Manu Otel</a>
+</footer>
 
 <style>
   /* Header */
@@ -420,6 +428,24 @@
     transition: width 0.6s cubic-bezier(0.65, 0, 0.35, 1);
     border-radius: var(--radius-full);
     box-shadow: 0 0 10px rgba(37, 99, 235, 0.5);
+  }
+
+  .credit-footer {
+    margin-top: var(--space-xl);
+    padding: var(--space-md) 0 var(--space-lg);
+    text-align: center;
+    font-size: 0.875rem;
+    color: var(--color-text-tertiary);
+  }
+
+  .credit-footer a {
+    color: inherit;
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .credit-footer a:hover {
+    color: var(--color-primary);
   }
 
   /* Responsive */
