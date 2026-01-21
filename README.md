@@ -31,7 +31,7 @@ A privacy-first web app for tracking projects across quarters and the year. No a
 
 ```bash
 # Clone the repository
-git clone https://github.com/ManuOtel/quarter-clock
+git clone https://github.com/ManuOtel/quarterly-clock
 cd quarter-clock
 
 # Install dependencies
