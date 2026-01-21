@@ -2,7 +2,7 @@
 
 A privacy-first web app for tracking projects across quarters and the year. No accounts, no servers—your data stays in your browser.
 
-**Live site:** https://quarterly-clock.manuotel.com/
+**Live site:** <https://quarterly-clock.manuotel.com/>
 
 ## Features
 
@@ -106,8 +106,7 @@ All data lives in `localStorage` as JSON:
 
 Quarter Clock builds to static files, so you can host it anywhere.
 
-**Canonical URL:** https://quarterly-clock.manuotel.com/
-
+**Canonical URL:** <https://quarterly-clock.manuotel.com/>
 
 - **GitHub Pages** — Free, works out of the box
 - **Netlify / Vercel** — Just connect your repo
