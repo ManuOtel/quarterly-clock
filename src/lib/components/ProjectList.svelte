@@ -63,23 +63,29 @@
   {:else}
     <ul class="project-list">
       {#each projects as project}
-        <li class:selected={project.id === selectedProjectId}>
-          <button type="button" class="project-btn" on:click={() => selectProject(project.id)}>
+        <li
+          class:selected={project.id === selectedProjectId}
+          on:click={() => selectProject(project.id)}
+          on:keydown={(e) => e.key === 'Enter' && selectProject(project.id)}
+          role="button"
+          tabindex="0"
+        >
+          <div class="project-content">
             <h3>{project.name}</h3>
             <div class="project-meta">
               <p class="meta">
                 Due {project.deadline} • {getCompletionPercent(project).toFixed(0)}%
               </p>
-              <div class="badge {getProjectStatus(project, quarter)}">
+              <span class="badge {getProjectStatus(project, quarter)}">
                 {getProjectStatus(project, quarter).replace("_", " ")}
-              </div>
+              </span>
             </div>
-          </button>
+          </div>
           <button
             type="button"
-            class="icon"
+            class="icon delete-btn"
             title="Delete project"
-            on:click={() => deleteProject(project.id)}
+            on:click|stopPropagation={() => deleteProject(project.id)}
           >
             ✕
           </button>
@@ -163,6 +169,7 @@
     transition: all var(--transition-base);
     position: relative;
     overflow: hidden;
+    cursor: pointer;
   }
 
   .project-list li::before {
@@ -182,6 +189,11 @@
     border-color: var(--color-primary-light);
   }
 
+  .project-list li:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+  }
+
   .project-list li.selected {
     border-color: var(--color-primary);
     background: var(--color-primary-bg);
@@ -192,28 +204,13 @@
     background: linear-gradient(180deg, var(--color-primary) 0%, var(--color-secondary) 100%);
   }
 
-  .project-btn {
+  .project-content {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
     gap: var(--space-xs);
-    background: none;
-    border: none;
-    padding: 0;
-    cursor: pointer;
-    text-align: left;
-    color: inherit;
-    font: inherit;
-    width: 100%;
   }
 
-  .project-btn:focus-visible {
-    outline: 2px solid var(--color-primary);
-    outline-offset: 2px;
-    border-radius: var(--radius-md);
-  }
-
-  .project-btn h3 {
+  .project-content h3 {
     margin: 0;
     font-size: 1.0625rem;
     font-weight: 600;
@@ -224,8 +221,6 @@
     display: flex;
     align-items: center;
     gap: var(--space-md);
-    width: 100%;
-    justify-content: space-between;
   }
 
   .meta {
@@ -233,6 +228,15 @@
     color: var(--color-text-secondary);
     font-size: 0.875rem;
     line-height: 1.5;
+  }
+
+  .delete-btn {
+    opacity: 0.5;
+    transition: opacity var(--transition-base);
+  }
+
+  .project-list li:hover .delete-btn {
+    opacity: 1;
   }
 
   /* Badges */
@@ -247,24 +251,22 @@
     letter-spacing: 0.025em;
     white-space: nowrap;
     flex-shrink: 0;
+    pointer-events: none;
   }
 
   .badge.ahead {
-    background: var(--color-success-light);
+    background: var(--color-success-bg);
     color: var(--color-success);
-    box-shadow: 0 0 0 3px var(--color-success-bg);
   }
 
   .badge.on_track {
-    background: var(--color-info-light);
+    background: var(--color-info-bg);
     color: var(--color-info);
-    box-shadow: 0 0 0 3px var(--color-info-bg);
   }
 
   .badge.behind {
     background: var(--color-danger-bg);
     color: var(--color-danger);
-    box-shadow: 0 0 0 3px var(--color-danger-light);
   }
 
   @media (max-width: 640px) {

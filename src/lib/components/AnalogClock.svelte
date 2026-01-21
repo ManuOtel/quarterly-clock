@@ -66,8 +66,8 @@
     <line x1="180" y1="180" x2="180" y2="315" class="quarter-separator" />
     <line x1="180" y1="180" x2="45" y2="180" class="quarter-separator" />
 
-    <!-- Clock margin circle (outer ring) - background -->
-    <circle cx="180" cy="180" r="145" fill="none" stroke="var(--color-border)" stroke-width="8" opacity="0.3" />
+    <!-- Clock margin circle (outer ring) - unfilled track -->
+    <circle cx="180" cy="180" r="145" fill="none" stroke="var(--color-primary)" stroke-width="8" opacity="0.15" />
 
     <!-- Year progress arc (fills around the border) -->
     <circle
