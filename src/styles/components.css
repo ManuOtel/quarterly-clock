@@ -1,0 +1,210 @@
+:root {
+  color: var(--color-text-primary);
+}
+
+/* Buttons */
+button {
+  border-radius: var(--radius-lg);
+  border: 1px solid transparent;
+  padding: 0.625rem 1.25rem;
+  background: var(--color-text-primary);
+  color: var(--color-bg-primary);
+  font-weight: 500;
+  font-size: 0.9375rem;
+  cursor: pointer;
+  transition: all var(--transition-base);
+  box-shadow: var(--shadow-sm);
+  position: relative;
+  overflow: hidden;
+}
+
+button:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+  background: var(--color-primary-dark);
+}
+
+button:active {
+  transform: translateY(0);
+  box-shadow: var(--shadow-sm);
+}
+
+button:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+button.secondary {
+  background: var(--color-bg-primary);
+  color: var(--color-text-primary);
+  border: 1px solid var(--color-border);
+}
+
+button.secondary:hover {
+  background: var(--color-bg-secondary);
+  border-color: var(--color-text-secondary);
+  transform: translateY(-1px);
+}
+
+button.icon {
+  background: transparent;
+  color: var(--color-text-tertiary);
+  border: none;
+  padding: 0.375rem;
+  box-shadow: none;
+  border-radius: var(--radius-md);
+  min-width: 32px;
+  min-height: 32px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+button.icon:hover {
+  color: var(--color-danger);
+  background: var(--color-danger-bg);
+  box-shadow: none;
+  transform: scale(1.1);
+}
+
+button.icon:active {
+  transform: scale(0.95);
+}
+
+/* Inputs */
+input[type="text"],
+input[type="date"],
+input[type="checkbox"] {
+  font-family: inherit;
+}
+
+input[type="text"],
+input[type="date"] {
+  border-radius: var(--radius-lg);
+  border: 2px solid var(--color-border);
+  padding: 0.625rem 0.875rem;
+  width: 100%;
+  background: var(--color-bg-primary);
+  color: var(--color-text-primary);
+  font-size: 0.9375rem;
+  transition: all var(--transition-base);
+}
+
+input[type="text"]:hover,
+input[type="date"]:hover {
+  border-color: var(--color-text-secondary);
+}
+
+input[type="text"]:focus,
+input[type="date"]:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px var(--color-primary-bg);
+}
+
+input[type="text"]::placeholder {
+  color: var(--color-text-tertiary);
+}
+
+input[type="checkbox"] {
+  width: 1.25rem;
+  height: 1.25rem;
+  border-radius: var(--radius-sm);
+  border: 2px solid var(--color-border);
+  cursor: pointer;
+  transition: all var(--transition-base);
+  appearance: none;
+  background: var(--color-bg-primary);
+  position: relative;
+}
+
+input[type="checkbox"]:hover {
+  border-color: var(--color-primary);
+}
+
+input[type="checkbox"]:checked {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+input[type="checkbox"]:checked::after {
+  content: "✓";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+input[type="checkbox"]:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+label {
+  display: grid;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--color-text-secondary);
+}
+
+/* Cards */
+.card {
+  background: var(--color-bg-primary);
+  border-radius: var(--radius-2xl);
+  padding: var(--space-xl);
+  box-shadow: var(--shadow-xl);
+  border: 1px solid var(--color-border-light);
+  transition: all var(--transition-base);
+  position: relative;
+  overflow: hidden;
+  animation: fadeIn 0.4s ease-out;
+}
+
+.card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+  opacity: 0;
+  transition: opacity var(--transition-base);
+}
+
+.card:hover::before {
+  opacity: 1;
+}
+
+/* Empty States */
+.empty {
+  color: var(--color-text-secondary);
+  font-size: 0.9375rem;
+  text-align: center;
+  padding: var(--space-xl);
+  background: var(--color-bg-secondary);
+  border-radius: var(--radius-xl);
+  border: 2px dashed var(--color-border);
+  line-height: 1.6;
+}
+
+.empty::before {
+  content: "📭";
+  display: block;
+  font-size: 3rem;
+  margin-bottom: var(--space-md);
+  opacity: 0.5;
+}
+
+/* Responsive Design (shared elements) */
+@media (max-width: 640px) {
+  button,
+  input[type="text"],
+  input[type="date"] {
+    min-height: 44px;
+  }
+}

@@ -124,9 +124,10 @@ export const getProjectStatus = (
   today = new Date()
 ): ProjectStatus => {
   const completion = getCompletionPercent(project);
+  const startDate = new Date(project.startDate + "T00:00:00");
   const deadline = new Date(project.deadline + "T00:00:00");
-  const totalTime = daysBetween(quarter.start, deadline);
-  const elapsed = daysBetween(quarter.start, today);
+  const totalTime = daysBetween(startDate, deadline);
+  const elapsed = daysBetween(startDate, today);
   const expected =
     totalTime <= 0 ? 100 : clamp((elapsed / totalTime) * 100, 0, 100);
   const delta = completion - expected;
@@ -134,4 +135,28 @@ export const getProjectStatus = (
   if (delta >= 10) return "ahead";
   if (delta <= -10) return "behind";
   return "on_track";
+};
+
+// Helper to get quarter dates as ISO strings
+export const getQuarterDates = (quarter: 1 | 2 | 3 | 4, year: number) => {
+  const info = getQuarterInfoFor(quarter, year);
+  return {
+    start: info.start.toISOString().slice(0, 10),
+    end: info.end.toISOString().slice(0, 10)
+  };
+};
+
+// Check if a project overlaps with a specific quarter
+export const projectOverlapsQuarter = (
+  project: Project,
+  quarter: 1 | 2 | 3 | 4,
+  year: number
+): boolean => {
+  const quarterInfo = getQuarterInfoFor(quarter, year);
+  const projectStart = new Date(project.startDate + "T00:00:00");
+  const projectEnd = new Date(project.deadline + "T00:00:00");
+  const quarterStart = quarterInfo.start;
+  const quarterEnd = quarterInfo.end;
+
+  return projectStart <= quarterEnd && projectEnd >= quarterStart;
 };

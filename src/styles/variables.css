@@ -1,0 +1,106 @@
+:root {
+  /* Color System - Anthropic-Inspired */
+  --color-text-primary: #1a1a1a;
+  --color-text-secondary: #6b6b6b;
+  --color-text-tertiary: #9ca3af;
+  --color-bg-primary: #fdfbf9;
+  --color-bg-secondary: #fdf6f3;
+  --color-bg-tertiary: #f5f1ed;
+  --color-bg-quaternary: #fef9f5;
+  --color-border: #e8ddd5;
+  --color-border-light: #f0e7df;
+
+  /* Brand Colors - Anthropic Terracotta/Coral */
+  --color-primary: #c65d3b;
+  --color-primary-light: #e07855;
+  --color-primary-dark: #a84d2f;
+  --color-primary-bg: #fdf6f3;
+
+  --color-secondary: #e8a87c;
+  --color-secondary-light: #f0bfa0;
+  --color-secondary-bg: #fef9f5;
+
+  /* Quarter-Specific Color Themes */
+  /* Q1 - Coral/Terracotta (warm, energetic start) */
+  --color-q1: #c65d3b;
+  --color-q1-light: #e07855;
+  --color-q1-dark: #a84d2f;
+  --color-q1-bg: #fdf6f3;
+
+  /* Q2 - Sage Green (growth, spring vibes) */
+  --color-q2: #4a9b6b;
+  --color-q2-light: #5db182;
+  --color-q2-dark: #3d8159;
+  --color-q2-bg: #e6f4ed;
+
+  /* Q3 - Muted Teal (summer calm) */
+  --color-q3: #4a8b9b;
+  --color-q3-light: #5da7ba;
+  --color-q3-dark: #3d7380;
+  --color-q3-bg: #e6f2f4;
+
+  /* Q4 - Warm Purple (autumn richness) */
+  --color-q4: #8b5a9b;
+  --color-q4-light: #a372b3;
+  --color-q4-dark: #734a80;
+  --color-q4-bg: #f3eaf5;
+
+  /* Accent Colors - Expanded Palette */
+  --color-amber: #d97706;
+  --color-amber-light: #f59e0b;
+  --color-amber-bg: #fef3c7;
+
+  --color-lavender: #9b7eb3;
+  --color-lavender-light: #b69acf;
+  --color-lavender-bg: #f5eff9;
+
+  --color-sand: #d4a574;
+  --color-sand-light: #e8ba8f;
+  --color-sand-bg: #fdf7f0;
+
+  /* Status Colors - Enhanced */
+  --color-success: #4a9b6b;
+  --color-success-bg: #e6f4ed;
+  --color-success-light: #d1f0e0;
+
+  --color-info: #5b8fb9;
+  --color-info-bg: #e8f2f8;
+  --color-info-light: #d4e8f4;
+
+  --color-warning: #d97706;
+  --color-warning-bg: #fef3c7;
+  --color-warning-light: #fde68a;
+
+  --color-danger: #d45b52;
+  --color-danger-bg: #fceeed;
+  --color-danger-light: #f8dbd9;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  --shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  --shadow-inner: inset 0 2px 4px 0 rgba(0, 0, 0, 0.06);
+
+  /* Spacing Scale */
+  --space-xs: 0.5rem;
+  --space-sm: 0.75rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
+  --space-2xl: 2.5rem;
+
+  /* Border Radius */
+  --radius-sm: 0.375rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+  --radius-2xl: 1.5rem;
+  --radius-full: 9999px;
+
+  /* Transitions */
+  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-base: 200ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+}

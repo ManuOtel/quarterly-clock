@@ -1,5 +1,8 @@
 import { mount } from 'svelte'
-import './app.css'
+import './styles/variables.css'
+import './styles/base.css'
+import './styles/components.css'
+import './styles/utilities.css'
 import App from './App.svelte'
 
 const app = mount(App, {

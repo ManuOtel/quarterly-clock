@@ -1,4 +1,5 @@
 import type { Project } from "./types";
+import { getQuarterInfo } from "./date";
 
 const STORAGE_KEY = "quarter-clock";
 
@@ -10,10 +11,26 @@ export const createEmptyData = (): StoredData => ({ projects: [] });
 
 const isBrowser = () => typeof window !== "undefined";
 
+// Migrate old projects that don't have startDate
+const migrateProject = (project: any): Project => {
+  if (project.startDate) {
+    return project as Project;
+  }
+
+  // For old projects without startDate, use the current quarter's start date
+  const quarter = getQuarterInfo();
+  const startDate = quarter.start.toISOString().slice(0, 10);
+
+  return {
+    ...project,
+    startDate
+  };
+};
+
 const normalizeData = (data: unknown): StoredData => {
   if (!data || typeof data !== "object") return createEmptyData();
   const projects = Array.isArray((data as StoredData).projects)
-    ? (data as StoredData).projects
+    ? (data as StoredData).projects.map(migrateProject)
     : [];
   return { projects };
 };

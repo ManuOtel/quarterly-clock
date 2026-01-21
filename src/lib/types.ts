@@ -7,7 +7,8 @@ export type Subtask = {
 export type Project = {
   id: string;
   name: string;
-  deadline: string; // YYYY-MM-DD
+  startDate: string; // YYYY-MM-DD
+  deadline: string; // YYYY-MM-DD (end date)
   subtasks: Subtask[];
 };
 

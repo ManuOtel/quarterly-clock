@@ -1,13 +1,13 @@
-<script>
+<script lang="ts">
   import { onMount } from "svelte";
   import {
     getQuarterInfo,
     getQuarterInfoFor,
     getYearInfo,
-    getCompletionPercent,
-    getProjectStatus,
-    getDaysUntilDeadline
+    getQuarterDates,
+    projectOverlapsQuarter
   } from "./lib/date";
+  import { getMonthInfo, generateId } from "./lib/utils";
   import {
     createEmptyData,
     exportData,
@@ -15,13 +15,21 @@
     loadData,
     saveData
   } from "./lib/storage";
+  import AnalogClock from "./lib/components/AnalogClock.svelte";
+  import QuarterCards from "./lib/components/QuarterCards.svelte";
+  import ProjectList from "./lib/components/ProjectList.svelte";
+  import ProjectDetails from "./lib/components/ProjectDetails.svelte";
 
   let data = createEmptyData();
   let selectedProjectId = "";
   let hasLoaded = false;
   let newProjectName = "";
+  let newProjectStartDate = "";
   let newProjectDeadline = "";
   let newSubtaskDescription = "";
+  let startQuarterMode = "custom"; // "Q1" | "Q2" | "Q3" | "Q4" | "custom"
+  let endQuarterMode = "custom"; // "Q1" | "Q2" | "Q3" | "Q4" | "custom"
+  let selectedQuarterFilter = "all"; // "all" | "Q1" | "Q2" | "Q3" | "Q4"
 
   const formatDate = (date) => date.toISOString().slice(0, 10);
   const today = new Date();
@@ -31,25 +39,13 @@
     getQuarterInfoFor(value, yearInfo.year, today)
   );
 
-  const circleDash = (percent, radius) => {
-    const circumference = 2 * Math.PI * radius;
-    return `${circumference} ${circumference}`;
-  };
-
-  const circleOffset = (percent, radius) => {
-    const circumference = 2 * Math.PI * radius;
-    return circumference - (percent / 100) * circumference;
-  };
-
-  const generateId = () => {
-    if (typeof crypto !== "undefined" && crypto.randomUUID) {
-      return crypto.randomUUID();
-    }
-    return `id-${Date.now()}-${Math.random().toString(16).slice(2)}`;
-  };
+  const monthInfo = getMonthInfo(today);
 
   onMount(() => {
     data = loadData();
+    if (!newProjectStartDate) {
+      newProjectStartDate = formatDate(quarter.start);
+    }
     if (!newProjectDeadline) {
       newProjectDeadline = formatDate(quarter.end);
     }
@@ -63,17 +59,44 @@
   $: selectedProject =
     data.projects.find((project) => project.id === selectedProjectId) || null;
 
+  $: filteredSubtasks = selectedProject
+    ? selectedQuarterFilter === "all"
+      ? selectedProject.subtasks
+      : projectOverlapsQuarter(selectedProject, parseInt(selectedQuarterFilter.slice(1)), yearInfo.year)
+        ? selectedProject.subtasks
+        : []
+    : [];
+
+  $: projectQuarters = selectedProject
+    ? [1, 2, 3, 4].filter((q) =>
+        projectOverlapsQuarter(selectedProject, q, yearInfo.year)
+      )
+    : [];
+
   const selectProject = (projectId) => {
     selectedProjectId = projectId;
     newSubtaskDescription = "";
   };
 
+  const selectStartQuarter = (q: 1 | 2 | 3 | 4) => {
+    const dates = getQuarterDates(q, yearInfo.year);
+    newProjectStartDate = dates.start;
+    startQuarterMode = `Q${q}`;
+  };
+
+  const selectEndQuarter = (q: 1 | 2 | 3 | 4) => {
+    const dates = getQuarterDates(q, yearInfo.year);
+    newProjectDeadline = dates.end;
+    endQuarterMode = `Q${q}`;
+  };
+
   const addProject = () => {
     const name = newProjectName.trim();
-    if (!name || !newProjectDeadline) return;
+    if (!name || !newProjectStartDate || !newProjectDeadline) return;
     const project = {
       id: generateId(),
       name,
+      startDate: newProjectStartDate,
       deadline: newProjectDeadline,
       subtasks: []
     };
@@ -157,56 +180,30 @@
 
   <section class="card clock-card">
     <div class="clock-main">
-      <div class="clock-ring">
-        <svg width="140" height="140" viewBox="0 0 140 140">
-          <circle class="ring-base" cx="70" cy="70" r="54" />
-          <circle
-            class="ring-progress"
-            cx="70"
-            cy="70"
-            r="54"
-            stroke-dasharray={circleDash(yearInfo.percentComplete, 54)}
-            stroke-dashoffset={circleOffset(yearInfo.percentComplete, 54)}
-          />
-        </svg>
-        <div class="ring-label">
-          <strong>{yearInfo.percentComplete.toFixed(1)}%</strong>
-          <span>{yearInfo.year} done</span>
-        </div>
-      </div>
-      <div class="clock-meta">
+      <div class="year-progress-header">
+        <div class="year-badge">{yearInfo.year}</div>
         <h2>Year progress</h2>
-        <p>{yearInfo.daysElapsed} days elapsed</p>
-        <p>{yearInfo.daysRemaining} days remaining</p>
-      </div>
-    </div>
-    <div class="clock-quarters">
-      {#each quarters as info}
-        <div class:active={info.quarter === quarter.quarter} class="quarter-card">
-          <div class="mini-ring">
-            <svg width="76" height="76" viewBox="0 0 76 76">
-              <circle class="ring-base" cx="38" cy="38" r="28" />
-              <circle
-                class="ring-progress"
-                cx="38"
-                cy="38"
-                r="28"
-                stroke-dasharray={circleDash(info.percentComplete, 28)}
-                stroke-dashoffset={circleOffset(info.percentComplete, 28)}
-              />
-            </svg>
-            <div class="ring-label small">
-              <strong>{info.percentComplete.toFixed(0)}%</strong>
-              <span>Q{info.quarter}</span>
-            </div>
+        <div class="year-progress-stats">
+          <div class="stat-item">
+            <span class="stat-value">{yearInfo.percentComplete.toFixed(1)}%</span>
+            <span class="stat-label">Complete</span>
           </div>
-          <div class="quarter-meta">
-            <span>{info.daysElapsed} done</span>
-            <span>{info.daysRemaining} left</span>
+          <div class="stat-divider"></div>
+          <div class="stat-item">
+            <span class="stat-value">{yearInfo.daysElapsed}</span>
+            <span class="stat-label">Days elapsed</span>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="stat-item">
+            <span class="stat-value">{yearInfo.daysRemaining}</span>
+            <span class="stat-label">Days remaining</span>
           </div>
         </div>
-      {/each}
+      </div>
+
+      <AnalogClock {yearInfo} {monthInfo} />
     </div>
+    <QuarterCards {quarters} activeQuarter={quarter} />
   </section>
 
   <section class="card">
@@ -218,7 +215,7 @@
       </div>
       <div class="progress">
         <div class="progress-bar">
-          <div class="progress-fill" style={`width: ${quarter.percentComplete}%`} />
+          <div class="progress-fill" style={`width: ${quarter.percentComplete}%`}></div>
         </div>
         <span>{quarter.percentComplete.toFixed(1)}% complete</span>
       </div>
@@ -226,135 +223,233 @@
   </section>
 
   <section class="grid">
-    <div class="card">
-      <h2>Projects</h2>
-      <div class="form-row">
-        <input
-          type="text"
-          placeholder="Project name"
-          bind:value={newProjectName}
-        />
-        <input type="date" bind:value={newProjectDeadline} />
-        <button type="button" on:click={addProject}>Add</button>
-      </div>
-      {#if data.projects.length === 0}
-        <p class="empty">No projects yet. Add one to get started.</p>
-      {:else}
-        <ul class="project-list">
-          {#each data.projects as project}
-            <li
-              class:selected={project.id === selectedProjectId}
-              on:click={() => selectProject(project.id)}
-            >
-              <div>
-                <h3>{project.name}</h3>
-                <p class="meta">
-                  Due {project.deadline} • {getCompletionPercent(project).toFixed(0)}%
-                </p>
-              </div>
-              <div class="badge {getProjectStatus(project, quarter)}">
-                {getProjectStatus(project, quarter).replace("_", " ")}
-              </div>
-              <button
-                type="button"
-                class="icon"
-                title="Delete project"
-                on:click|stopPropagation={() => deleteProject(project.id)}
-              >
-                ✕
-              </button>
-            </li>
-          {/each}
-        </ul>
-      {/if}
-    </div>
+    <ProjectList
+      projects={data.projects}
+      {selectedProjectId}
+      {quarter}
+      {selectProject}
+      {selectStartQuarter}
+      {selectEndQuarter}
+      {addProject}
+      {deleteProject}
+      bind:newProjectName
+      bind:newProjectStartDate
+      bind:newProjectDeadline
+      bind:startQuarterMode
+      bind:endQuarterMode
+    />
 
-    <div class="card">
-      <h2>Project details</h2>
-      {#if !selectedProject}
-        <p class="empty">Select a project to edit its details.</p>
-      {:else}
-        <div class="form-column">
-          <label>
-            Project name
-            <input
-              type="text"
-              value={selectedProject.name}
-              on:input={(event) =>
-                updateProject(selectedProject.id, {
-                  name: event.target.value
-                })}
-            />
-          </label>
-          <label>
-            Deadline
-            <input
-              type="date"
-              value={selectedProject.deadline}
-              on:input={(event) =>
-                updateProject(selectedProject.id, {
-                  deadline: event.target.value
-                })}
-            />
-          </label>
-          <div class="stats">
-            <div>
-              <span class="label">Completion</span>
-              <strong>{getCompletionPercent(selectedProject).toFixed(0)}%</strong>
-            </div>
-            <div>
-              <span class="label">Days to deadline</span>
-              <strong>{getDaysUntilDeadline(selectedProject)}</strong>
-            </div>
-          </div>
-        </div>
-
-        <div class="subtasks">
-          <h3>Subtasks</h3>
-          <div class="form-row">
-            <input
-              type="text"
-              placeholder="New subtask"
-              bind:value={newSubtaskDescription}
-            />
-            <button type="button" on:click={addSubtask}>Add</button>
-          </div>
-          {#if selectedProject.subtasks.length === 0}
-            <p class="empty">No subtasks yet. Add one to start tracking.</p>
-          {:else}
-            <ul>
-              {#each selectedProject.subtasks as subtask}
-                <li class="subtask">
-                  <input
-                    type="checkbox"
-                    checked={subtask.completed}
-                    on:change={(event) =>
-                      updateSubtask(subtask.id, {
-                        completed: event.target.checked
-                      })}
-                  />
-                  <input
-                    type="text"
-                    value={subtask.description}
-                    on:input={(event) =>
-                      updateSubtask(subtask.id, {
-                        description: event.target.value
-                      })}
-                  />
-                  <button
-                    type="button"
-                    class="icon"
-                    title="Delete subtask"
-                    on:click={() => deleteSubtask(subtask.id)}
-                  >
-                    ✕
-                  </button>
-                </li>
-              {/each}
-            </ul>
-          {/if}
-        </div>
-      {/if}
-    </div>
+    <ProjectDetails
+      {selectedProject}
+      {projectQuarters}
+      {filteredSubtasks}
+      {updateProject}
+      {addSubtask}
+      {updateSubtask}
+      {deleteSubtask}
+      bind:selectedQuarterFilter
+      bind:newSubtaskDescription
+    />
   </section>
 </main>
+
+<style>
+  /* Header */
+  .header {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--space-lg);
+    flex-wrap: wrap;
+    margin-bottom: var(--space-xl);
+    padding: var(--space-lg);
+    background: linear-gradient(135deg, var(--color-bg-primary) 0%, var(--color-bg-secondary) 100%);
+    border-radius: var(--radius-2xl);
+    box-shadow: var(--shadow-lg);
+    border: 1px solid var(--color-border-light);
+  }
+
+  .subtitle {
+    margin: 0.5rem 0 0;
+    color: var(--color-text-secondary);
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+
+  .header-actions {
+    display: flex;
+    gap: var(--space-sm);
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .file-input {
+    border-radius: var(--radius-lg);
+    border: 2px dashed var(--color-border);
+    padding: 0.625rem 1.125rem;
+    font-size: 0.9375rem;
+    font-weight: 500;
+    cursor: pointer;
+    color: var(--color-text-primary);
+    background: var(--color-bg-primary);
+    transition: all var(--transition-base);
+  }
+
+  .file-input:hover {
+    border-color: var(--color-primary);
+    background: var(--color-primary-bg);
+    transform: translateY(-1px);
+  }
+
+  .file-input input {
+    display: none;
+  }
+
+  /* Clock Components */
+  .clock-card {
+    display: grid;
+    gap: var(--space-xl);
+    background: linear-gradient(135deg, var(--color-bg-primary) 0%, var(--color-bg-secondary) 100%);
+  }
+
+  .clock-main {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xl);
+    align-items: center;
+    justify-content: center;
+  }
+
+  .year-progress-header {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+    align-items: center;
+    text-align: center;
+  }
+
+  .year-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem 1.25rem;
+    background: linear-gradient(135deg, var(--color-q1) 0%, var(--color-q2) 50%, var(--color-q4) 100%);
+    color: white;
+    font-size: 1rem;
+    font-weight: 700;
+    border-radius: var(--radius-full);
+    box-shadow: 0 4px 12px rgba(198, 93, 59, 0.3);
+    letter-spacing: 0.05em;
+  }
+
+  .year-progress-stats {
+    display: flex;
+    gap: var(--space-lg);
+    align-items: center;
+    background: var(--color-bg-secondary);
+    padding: var(--space-md) var(--space-xl);
+    border-radius: var(--radius-xl);
+    border: 1px solid var(--color-border);
+  }
+
+  .stat-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    align-items: center;
+  }
+
+  .stat-value {
+    font-size: 1.75rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, var(--color-q1) 0%, var(--color-q2) 50%, var(--color-q4) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1;
+  }
+
+  .stat-label {
+    font-size: 0.75rem;
+    color: var(--color-text-tertiary);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .stat-divider {
+    width: 1px;
+    height: 2.5rem;
+    background: var(--color-border);
+  }
+
+  /* Layout Grid */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: var(--space-xl);
+    margin-top: var(--space-xl);
+  }
+
+  .quarter-summary {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--space-lg);
+    flex-wrap: wrap;
+  }
+
+  .progress {
+    display: grid;
+    gap: var(--space-sm);
+    min-width: 240px;
+  }
+
+  .progress-bar {
+    width: 100%;
+    height: 10px;
+    border-radius: var(--radius-full);
+    background: var(--color-border);
+    overflow: hidden;
+    box-shadow: var(--shadow-inner);
+  }
+
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--color-secondary) 0%, var(--color-primary) 100%);
+    transition: width 0.6s cubic-bezier(0.65, 0, 0.35, 1);
+    border-radius: var(--radius-full);
+    box-shadow: 0 0 10px rgba(37, 99, 235, 0.5);
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .header {
+      padding: var(--space-md);
+    }
+
+    .clock-main {
+      justify-content: center;
+    }
+
+    .grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .quarter-summary {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .progress {
+      width: 100%;
+      min-width: unset;
+    }
+
+    .file-input {
+      min-height: 44px;
+    }
+  }
+</style>
