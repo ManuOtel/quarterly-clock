@@ -107,8 +107,21 @@ Quarter Clock builds to static files, so you can host it anywhere:
 - **GitHub Pages** — Free, works out of the box
 - **Netlify / Vercel** — Just connect your repo
 - **Any static host** — Upload the `dist/` folder
+- **Docker** — Build and run a containerized static server
 
 No server-side logic, no environment variables, no database connections needed.
+
+### Docker
+
+```bash
+# Build the image
+docker build -t quarter-clock .
+
+# Run the container
+docker run --rm -p 8080:80 quarter-clock
+```
+
+Open [http://localhost:8080](http://localhost:8080) in your browser.
 
 ## Contributing
 
