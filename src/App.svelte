@@ -257,8 +257,89 @@
 </main>
 
 <footer class="credit-footer">
-  <span>Made by </span>
-  <a href="https://manuotel.com" target="_blank" rel="noopener noreferrer">Manu Otel</a>
+  <div class="credit-content">
+    <div class="credit-identity">
+      <span>Made by</span>
+      <a href="https://manuotel.com" target="_blank" rel="noopener noreferrer">Manu Otel</a>
+    </div>
+    <div class="credit-links" aria-label="Follow Manu Otel">
+      <a
+        href="https://x.com/manuotel"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Manu Otel on X"
+      >
+        <span class="credit-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" role="img" focusable="false">
+            <path
+              d="M18.244 2H21l-6.588 7.53L22.75 22h-6.72l-5.157-6.6L4.92 22H2.16l7.057-8.07L1.25 2h6.89l4.66 6.1L18.244 2zm-1.2 18h1.75L7.79 4h-1.9l11.254 16z"
+            />
+          </svg>
+        </span>
+        <span>X</span>
+      </a>
+      <a
+        href="https://www.linkedin.com/in/manuotel/"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Manu Otel on LinkedIn"
+      >
+        <span class="credit-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" role="img" focusable="false">
+            <path
+              d="M4.98 3.5C4.98 4.88 3.86 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1 4.98 2.12 4.98 3.5zM.5 8h4V24h-4V8zm7.5 0h3.8v2.2h.06c.53-1 1.84-2.2 3.8-2.2 4.06 0 4.8 2.67 4.8 6.15V24h-4v-7.7c0-1.84-.03-4.2-2.56-4.2-2.56 0-2.95 2-2.95 4.07V24h-4V8z"
+            />
+          </svg>
+        </span>
+        <span>LinkedIn</span>
+      </a>
+      <a
+        href="https://github.com/ManuOtel"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Manu Otel on GitHub"
+      >
+        <span class="credit-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" role="img" focusable="false">
+            <path
+              d="M12 .5C5.73.5.5 5.74.5 12.21c0 5.1 3.29 9.43 7.86 10.96.58.11.79-.26.79-.58v-2.05c-3.2.71-3.88-1.4-3.88-1.4-.53-1.37-1.3-1.73-1.3-1.73-1.06-.74.08-.73.08-.73 1.17.08 1.78 1.21 1.78 1.21 1.04 1.8 2.73 1.28 3.39.98.1-.77.4-1.28.72-1.57-2.55-.3-5.24-1.31-5.24-5.81 0-1.29.46-2.35 1.2-3.18-.12-.3-.52-1.5.11-3.12 0 0 .98-.32 3.2 1.2.93-.26 1.92-.39 2.91-.39.99 0 1.98.13 2.91.39 2.22-1.52 3.2-1.2 3.2-1.2.63 1.62.23 2.82.11 3.12.74.83 1.2 1.89 1.2 3.18 0 4.52-2.7 5.5-5.26 5.8.41.36.78 1.08.78 2.18v3.24c0 .32.21.69.8.57 4.57-1.53 7.85-5.86 7.85-10.96C23.5 5.74 18.27.5 12 .5z"
+            />
+          </svg>
+        </span>
+        <span>GitHub</span>
+      </a>
+      <a
+        href="https://manuotel.com/"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Manu Otel website"
+      >
+        <span class="credit-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" role="img" focusable="false">
+            <path
+              d="M12 2a10 10 0 100 20 10 10 0 000-20zm7.93 9h-3.17a15.6 15.6 0 00-1.38-5.06A8.02 8.02 0 0119.93 11zM12 4.07c.95 1.15 1.7 2.75 2.14 4.93H9.86c.44-2.18 1.19-3.78 2.14-4.93zM8.62 5.94A15.6 15.6 0 007.24 11H4.07a8.02 8.02 0 014.55-5.06zM4.07 13h3.17c.27 1.89.86 3.63 1.38 5.06A8.02 8.02 0 014.07 13zm5.79 0h4.28c-.44 2.18-1.19 3.78-2.14 4.93-.95-1.15-1.7-2.75-2.14-4.93zm5.52 5.06A15.6 15.6 0 0016.76 13h3.17a8.02 8.02 0 01-4.55 5.06z"
+            />
+          </svg>
+        </span>
+        <span>Website</span>
+      </a>
+      <a
+        href="https://github.com/ManuOtel/quarterly-clock"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Quarter Clock repository"
+      >
+        <span class="credit-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" role="img" focusable="false">
+            <path
+              d="M23.546 10.93L13.067.452c-.604-.603-1.582-.603-2.188 0L8.708 2.627l2.76 2.76c.645-.215 1.379-.07 1.889.441.516.515.658 1.258.438 1.9l2.658 2.66c.645-.223 1.387-.078 1.9.435.721.72.721 1.884 0 2.604-.719.719-1.881.719-2.6 0-.539-.541-.674-1.337-.404-1.996L12.86 8.955v6.525c.176.086.342.203.488.348.713.721.713 1.883 0 2.6-.719.721-1.889.721-2.609 0-.719-.719-.719-1.879 0-2.598.182-.18.387-.316.605-.406V8.835c-.217-.091-.424-.222-.6-.401-.545-.545-.676-1.342-.396-2.009L7.636 3.7.45 10.881c-.6.605-.6 1.584 0 2.189l10.48 10.477c.604.604 1.582.604 2.186 0l10.43-10.43c.605-.603.605-1.582 0-2.187"
+            />
+          </svg>
+        </span>
+        <span>Repo</span>
+      </a>
+    </div>
+  </div>
 </footer>
 
 <style>
@@ -432,20 +513,71 @@
 
   .credit-footer {
     margin-top: var(--space-xl);
-    padding: var(--space-md) 0 var(--space-lg);
-    text-align: center;
+    padding: var(--space-lg) 0 var(--space-lg);
+    border-top: 1px solid var(--color-border-light);
+  }
+
+  .credit-content {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-md);
+    justify-content: space-between;
+    align-items: center;
     font-size: 0.875rem;
     color: var(--color-text-tertiary);
   }
 
-  .credit-footer a {
-    color: inherit;
+  .credit-identity {
+    display: flex;
+    gap: 0.4rem;
+    align-items: center;
+  }
+
+  .credit-identity a {
+    color: var(--color-text-primary);
     font-weight: 600;
     text-decoration: none;
   }
 
-  .credit-footer a:hover {
+  .credit-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+    align-items: center;
+  }
+
+  .credit-links a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.35rem 0.65rem;
+    border-radius: var(--radius-full);
+    border: 1px solid transparent;
+    text-decoration: none;
+    font-weight: 600;
+    color: var(--color-text-secondary);
+    background: var(--color-bg-secondary);
+    transition: all var(--transition-base);
+  }
+
+  .credit-links a:hover {
     color: var(--color-primary);
+    border-color: var(--color-border);
+    background: var(--color-bg-primary);
+    transform: translateY(-1px);
+  }
+
+  .credit-icon {
+    display: inline-flex;
+    width: 1rem;
+    height: 1rem;
+    color: currentColor;
+  }
+
+  .credit-icon svg {
+    width: 100%;
+    height: 100%;
+    fill: currentColor;
   }
 
   /* Responsive */
@@ -476,6 +608,15 @@
 
     .file-input {
       min-height: 44px;
+    }
+
+    .credit-content {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .credit-links {
+      width: 100%;
     }
   }
 </style>

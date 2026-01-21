@@ -1,16 +1,18 @@
 # Quarter Clock
 
-A privacy-first web app for tracking projects across quarters and the year. No accounts, no servers, no tracking—your data stays in your browser.
+A privacy-first web app for tracking projects across quarters and the year. No accounts, no servers—your data stays in your browser.
+
+**Live site:** https://quarterly-clock.manuotel.com/
 
 ## Features
 
-- **Year + Quarter Progress** — Track current year progress alongside Q1–Q4
-- **Quarter Clock UI** — Analog clock view with month markers and quarter arcs
-- **Project Management** — Create projects with start/end dates and subtasks
-- **Status Indicators** — See if projects are ahead, on track, or behind
-- **Quarter Filters** — Filter subtasks by quarter for multi-quarter projects
-- **100% Local Storage** — All data stored in your browser's localStorage
-- **Export/Import** — Back up your data as JSON anytime
+- Year and quarter progress bars that update daily
+- An analog clock view with month markers and quarter arcs
+- Projects with start/end dates and subtasks
+- Status indicators showing if you're ahead, on track, or behind
+- Quarter filters for multi-quarter projects
+- 100% localStorage (nothing leaves your browser)
+- JSON export/import for backups
 
 ## Tech Stack
 
@@ -102,14 +104,17 @@ All data lives in `localStorage` as JSON:
 
 ## Deployment
 
-Quarter Clock builds to static files, so you can host it anywhere:
+Quarter Clock builds to static files, so you can host it anywhere.
+
+**Canonical URL:** https://quarterly-clock.manuotel.com/
+
 
 - **GitHub Pages** — Free, works out of the box
 - **Netlify / Vercel** — Just connect your repo
 - **Any static host** — Upload the `dist/` folder
 - **Docker** — Build and run a containerized static server
 
-No server-side logic, no environment variables, no database connections needed.
+No backend needed.
 
 ### Docker
 
@@ -127,7 +132,7 @@ For **Coolify** deployment, set the exposed port to `3069`.
 
 ## Contributing
 
-Contributions are welcome! Feel free to:
+If you want to contribute:
 
 1. Fork the repository
 2. Create a feature branch (`git checkout -b feature/cool-thing`)
