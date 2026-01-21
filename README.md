@@ -1,13 +1,14 @@
 # Quarter Clock
 
-A lightweight, privacy-focused web app for tracking projects within quarterly timeframes. No accounts, no servers, no tracking—your data stays in your browser.
+A privacy-first web app for tracking projects across quarters and the year. No accounts, no servers, no tracking—your data stays in your browser.
 
 ## Features
 
-- **Quarter Progress Tracking** — See how far along the current quarter you are (Q1–Q4)
-- **Project Management** — Create projects with deadlines and subtasks
-- **Progress Visualization** — Track completion percentage and time remaining
-- **Status Indicators** — Know if you're on track, ahead, or behind schedule
+- **Year + Quarter Progress** — Track current year progress alongside Q1–Q4
+- **Quarter Clock UI** — Analog clock view with month markers and quarter arcs
+- **Project Management** — Create projects with start/end dates and subtasks
+- **Status Indicators** — See if projects are ahead, on track, or behind
+- **Quarter Filters** — Filter subtasks by quarter for multi-quarter projects
 - **100% Local Storage** — All data stored in your browser's localStorage
 - **Export/Import** — Back up your data as JSON anytime
 
@@ -15,7 +16,7 @@ A lightweight, privacy-focused web app for tracking projects within quarterly ti
 
 - [Svelte 5](https://svelte.dev/) — Reactive UI framework
 - [Vite](https://vite.dev/) — Build tool and dev server
-- No backend, no database, no dependencies beyond the essentials
+- Browser-only localStorage persistence (no backend)
 
 ## Getting Started
 
@@ -28,7 +29,7 @@ A lightweight, privacy-focused web app for tracking projects within quarterly ti
 
 ```bash
 # Clone the repository
-git clone https://github.com/ManuOtel/quarterly-clock
+git clone https://github.com/ManuOtel/quarter-clock
 cd quarter-clock
 
 # Install dependencies
@@ -57,15 +58,23 @@ The output is in the `dist/` folder—static files ready to deploy anywhere.
 - **Q3**: July 1 – September 30
 - **Q4**: October 1 – December 31
 
+Projects can span multiple quarters using the start and end dates.
+
 The app calculates progress as: `(days elapsed / total days in quarter) × 100`
+
+Year progress follows the same formula across the full year.
+
+### Project Completion
+
+Completion percentage is calculated from subtasks: `(completed subtasks / total subtasks) × 100`.
 
 ### Project Status
 
 Projects are marked as:
 
-- **On Track** — Completion % matches or exceeds expected progress based on time elapsed
-- **Behind** — Completion % is lower than expected given the timeline
-- **Ahead** — Completion % exceeds expected progress
+- **Ahead** — Completion % is 10%+ higher than expected
+- **On Track** — Completion % is within 10% of expected progress
+- **Behind** — Completion % is 10%+ lower than expected
 
 ### Data Storage
 
@@ -77,6 +86,7 @@ All data lives in `localStorage` as JSON:
     {
       "id": "unique-id",
       "name": "Project Name",
+      "startDate": "2026-01-01",
       "deadline": "2026-03-31",
       "subtasks": [
         {
