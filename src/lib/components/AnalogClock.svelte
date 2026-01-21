@@ -149,8 +149,8 @@
 
   .quarter-separator {
     stroke: var(--color-primary-dark);
-    stroke-width: 2;
-    opacity: 0.4;
+    stroke-width: 1.5;
+    opacity: 1;
   }
 
   .month-tick {
