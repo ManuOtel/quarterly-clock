@@ -1,11 +1,11 @@
 :root {
   /* Typography */
-  font-family: "Inter", system-ui, -apple-system, sans-serif;
+  font-family: var(--font-sans);
   line-height: 1.6;
   font-weight: 400;
 
   color: var(--color-text-primary);
-  background: linear-gradient(to bottom, #f5f7fb 0%, #ffffff 100%);
+  background-color: var(--color-bg-secondary);
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -21,6 +21,7 @@ body {
   min-width: 320px;
   min-height: 100vh;
   background: var(--color-bg-tertiary);
+  color: var(--color-text-primary);
 }
 
 #app {
@@ -30,39 +31,46 @@ body {
 }
 
 /* Typography Scale */
-h1 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-display);
   margin: 0;
-  font-size: 2rem;
-  font-weight: 700;
-  line-height: 1.2;
-  letter-spacing: -0.025em;
   color: var(--color-text-primary);
+  letter-spacing: -0.02em;
+}
+
+h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
 }
 
 h2 {
-  margin: 0;
-  font-size: 1.5rem;
+  font-size: 1.75rem;
   font-weight: 600;
-  line-height: 1.3;
-  letter-spacing: -0.015em;
-  color: var(--color-text-primary);
+  line-height: 1.25;
 }
 
 h3 {
-  margin: 0;
-  font-size: 1.125rem;
+  font-size: 1.25rem;
   font-weight: 600;
   line-height: 1.4;
-  color: var(--color-text-primary);
 }
 
 p {
   margin: 0;
   line-height: 1.6;
+  color: var(--color-text-secondary);
 }
 
 strong {
   font-weight: 600;
+  color: var(--color-text-primary);
 }
 
 button,
@@ -77,16 +85,16 @@ input {
   }
 
   h1 {
-    font-size: 1.75rem;
+    font-size: 2rem;
   }
 
   h2 {
-    font-size: 1.25rem;
+    font-size: 1.5rem;
   }
 }
 
 @media (max-width: 640px) {
   h1 {
-    font-size: 1.5rem;
+    font-size: 1.75rem;
   }
 }

@@ -1,87 +1,84 @@
 :root {
-  /* Color System - Anthropic-Inspired */
-  --color-text-primary: #1a1a1a;
-  --color-text-secondary: #6b6b6b;
+  /* Typography - Distinctive & High Quality */
+  --font-display: "Space Grotesk", system-ui, sans-serif;
+  --font-sans: "Plus Jakarta Sans", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+
+  /* Color System - High Contrast & Vibrancy */
+  --color-text-primary: #111827;
+  /* Darker for better readaility */
+  --color-text-secondary: #4b5563;
+  /* More distinct gray */
   --color-text-tertiary: #9ca3af;
+
+  /* Restored Warm Backgrounds */
   --color-bg-primary: #fdfbf9;
   --color-bg-secondary: #fdf6f3;
   --color-bg-tertiary: #f5f1ed;
   --color-bg-quaternary: #fef9f5;
+
   --color-border: #e8ddd5;
+  /* Warmer border to match */
   --color-border-light: #f0e7df;
+  --color-border-focus: #d1d5db;
 
-  /* Brand Colors - Anthropic Terracotta/Coral */
-  --color-primary: #c65d3b;
-  --color-primary-light: #e07855;
-  --color-primary-dark: #a84d2f;
-  --color-primary-bg: #fdf6f3;
+  /* Brand Colors - Refined & Saturated */
+  --color-primary: #ea580c;
+  /* Vivid Orange/Terracotta */
+  --color-primary-light: #fb923c;
+  --color-primary-dark: #c2410c;
+  --color-primary-bg: #fff7ed;
 
-  --color-secondary: #e8a87c;
-  --color-secondary-light: #f0bfa0;
-  --color-secondary-bg: #fef9f5;
+  --color-secondary: #f97316;
+  --color-secondary-light: #fdba74;
+  --color-secondary-bg: #ffedd5;
 
-  /* Quarter-Specific Color Themes */
-  /* Q1 - Coral/Terracotta (warm, energetic start) */
-  --color-q1: #c65d3b;
-  --color-q1-light: #e07855;
-  --color-q1-dark: #a84d2f;
-  --color-q1-bg: #fdf6f3;
+  /* Quarter-Specific Color Themes - More Pop */
+  /* Q1 - Energetic Terracotta */
+  --color-q1: #ea580c;
+  --color-q1-light: #fb923c;
+  --color-q1-dark: #9a3412;
+  --color-q1-bg: #fff7ed;
 
-  /* Q2 - Sage Green (growth, spring vibes) */
-  --color-q2: #4a9b6b;
-  --color-q2-light: #5db182;
-  --color-q2-dark: #3d8159;
-  --color-q2-bg: #e6f4ed;
+  /* Q2 - Fresh Emerald */
+  --color-q2: #059669;
+  --color-q2-light: #34d399;
+  --color-q2-dark: #065f46;
+  --color-q2-bg: #ecfdf5;
 
-  /* Q3 - Muted Teal (summer calm) */
-  --color-q3: #4a8b9b;
-  --color-q3-light: #5da7ba;
-  --color-q3-dark: #3d7380;
-  --color-q3-bg: #e6f2f4;
+  /* Q3 - Cool Cyan/Teal */
+  --color-q3: #0891b2;
+  --color-q3-light: #22d3ee;
+  --color-q3-dark: #155e75;
+  --color-q3-bg: #ecfeff;
 
-  /* Q4 - Warm Purple (autumn richness) */
-  --color-q4: #8b5a9b;
-  --color-q4-light: #a372b3;
-  --color-q4-dark: #734a80;
-  --color-q4-bg: #f3eaf5;
+  /* Q4 - Royal Purple */
+  --color-q4: #7c3aed;
+  --color-q4-light: #a78bfa;
+  --color-q4-dark: #5b21b6;
+  --color-q4-bg: #f5f3ff;
 
-  /* Accent Colors - Expanded Palette */
-  --color-amber: #d97706;
-  --color-amber-light: #f59e0b;
-  --color-amber-bg: #fef3c7;
+  /* Status Colors */
+  --color-success: #059669;
+  --color-success-bg: #ecfdf5;
 
-  --color-lavender: #9b7eb3;
-  --color-lavender-light: #b69acf;
-  --color-lavender-bg: #f5eff9;
-
-  --color-sand: #d4a574;
-  --color-sand-light: #e8ba8f;
-  --color-sand-bg: #fdf7f0;
-
-  /* Status Colors - Enhanced */
-  --color-success: #4a9b6b;
-  --color-success-bg: #e6f4ed;
-  --color-success-light: #d1f0e0;
-
-  --color-info: #5b8fb9;
-  --color-info-bg: #e8f2f8;
-  --color-info-light: #d4e8f4;
+  --color-info: #0284c7;
+  --color-info-bg: #f0f9ff;
 
   --color-warning: #d97706;
-  --color-warning-bg: #fef3c7;
-  --color-warning-light: #fde68a;
+  --color-warning-bg: #fffbeb;
 
-  --color-danger: #d45b52;
-  --color-danger-bg: #fceeed;
-  --color-danger-light: #f8dbd9;
+  --color-danger: #dc2626;
+  --color-danger-bg: #fef2f2;
+  --color-danger-light: #fca5a5;
 
-  /* Shadows */
+  /* Shadows - Crisper & Modern */
   --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
   --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
   --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
   --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-  --shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
   --shadow-inner: inset 0 2px 4px 0 rgba(0, 0, 0, 0.06);
+  --shadow-glow: 0 0 15px rgba(234, 88, 12, 0.15);
 
   /* Spacing Scale */
   --space-xs: 0.5rem;
@@ -89,7 +86,7 @@
   --space-md: 1rem;
   --space-lg: 1.5rem;
   --space-xl: 2rem;
-  --space-2xl: 2.5rem;
+  --space-2xl: 3rem;
 
   /* Border Radius */
   --radius-sm: 0.375rem;
@@ -103,4 +100,5 @@
   --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
   --transition-base: 200ms cubic-bezier(0.4, 0, 0.2, 1);
   --transition-slow: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-bounce: 500ms cubic-bezier(0.34, 1.56, 0.64, 1);
 }

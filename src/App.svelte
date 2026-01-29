@@ -343,13 +343,21 @@
 </footer>
 
 <style>
+  /* Main Layout */
+  main {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2xl);
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
   /* Header */
   .header {
     display: flex;
     justify-content: space-between;
     gap: var(--space-lg);
     flex-wrap: wrap;
-    margin-bottom: var(--space-xl);
     padding: var(--space-lg);
     background: linear-gradient(135deg, var(--color-bg-primary) 0%, var(--color-bg-secondary) 100%);
     border-radius: var(--radius-2xl);
@@ -449,18 +457,17 @@
   }
 
   .stat-value {
-    font-size: 1.75rem;
+    font-family: var(--font-mono);
+    font-size: 2rem;
     font-weight: 700;
-    background: linear-gradient(135deg, var(--color-q1) 0%, var(--color-q2) 50%, var(--color-q4) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: var(--color-primary);
     line-height: 1;
+    letter-spacing: -0.03em;
   }
 
   .stat-label {
     font-size: 0.75rem;
-    color: var(--color-text-tertiary);
+    color: var(--color-text-secondary);
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.05em;
@@ -477,7 +484,6 @@
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
     gap: var(--space-xl);
-    margin-top: var(--space-xl);
   }
 
   .quarter-summary {
